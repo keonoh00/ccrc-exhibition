@@ -12,7 +12,7 @@ export default function Header() {
     >
       <CCRCDrawer />
       <Heading fontSize="2xl">
-        연합학습 독립 항등분포 데이터를 위한 Logit 보정
+        독립 항등분포 데이터에 대한 logit 보정을 통한 연합 학습
       </Heading>
       {/* Spacer equivalent size to hamburger icon */}
       <Box w={10} h={10} />
