@@ -12,12 +12,7 @@ export default function Header() {
       border={"1px solid"}
       borderColor={"gray.200"}
     >
-      <Image
-        src={AssetSelector.logo}
-        alt="logo"
-        aspectRatio={6 / 1}
-        backgroundColor={"black"}
-      />
+      <Image src={AssetSelector.logo} alt="logo" aspectRatio={6 / 1} />
       <CCRCDrawer />
     </Flex>
   );
