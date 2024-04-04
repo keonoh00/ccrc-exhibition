@@ -1,4 +1,5 @@
 import CCRCAccordion from "../components/CCRCAccordian/CCRCAccordion";
+import CCRCCarousel from "../components/CCRCCarousel/CCRCCarousel";
 import ImageContainer from "../components/ImageContainer/ImageContainer";
 import { ScreenBaseProps } from "../types/screens";
 
@@ -9,6 +10,7 @@ const Home: React.FC<HomeScreenProps> = () => {
     <>
       <ImageContainer />
       <CCRCAccordion />
+      <CCRCCarousel />
     </>
   );
 };
