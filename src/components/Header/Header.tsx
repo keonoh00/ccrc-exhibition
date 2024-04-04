@@ -19,7 +19,6 @@ export default function Header() {
         backgroundColor={"black"}
       />
       <CCRCDrawer />
-      {/* Spacer equivalent size to hamburger icon */}
     </Flex>
   );
 }
