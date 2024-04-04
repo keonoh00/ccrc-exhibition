@@ -1,21 +1,25 @@
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Flex, Image } from "@chakra-ui/react";
 import CCRCDrawer from "../CCRCDrawer/CCRCDrawer";
+import { AssetSelector } from "../../assets";
 
 export default function Header() {
   return (
     <Flex
-      paddingBlock={8}
-      paddingInline={6}
+      paddingBlock={6}
+      paddingInline={28}
       justifyContent={"space-between"}
       alignItems={"center"}
-      backgroundColor={"gray.200"}
+      border={"1px solid"}
+      borderColor={"gray.200"}
     >
+      <Image
+        src={AssetSelector.logo}
+        alt="logo"
+        aspectRatio={6 / 1}
+        backgroundColor={"black"}
+      />
       <CCRCDrawer />
-      <Heading fontSize="2xl">
-        독립 항등분포 데이터에 대한 logit 보정을 통한 연합 학습
-      </Heading>
       {/* Spacer equivalent size to hamburger icon */}
-      <Box w={10} h={10} />
     </Flex>
   );
 }
