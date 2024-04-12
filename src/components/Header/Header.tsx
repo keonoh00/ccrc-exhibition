@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <Flex
       paddingBlock={6}
-      paddingInline={28}
+      paddingInline={"5%"}
       justifyContent={"space-between"}
       alignItems={"center"}
       border={"1px solid"}

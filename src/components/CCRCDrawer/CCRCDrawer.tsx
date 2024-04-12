@@ -21,14 +21,14 @@ export default function CCRCDrawer() {
       <HamburgerIcon w={10} h={10} ref={btnRef.current} onClick={onOpen} />
       <Drawer
         isOpen={isOpen}
-        placement="left"
+        placement="right"
         onClose={onClose}
         finalFocusRef={btnRef.current}
       >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>This is left drawer</DrawerHeader>
+          <DrawerHeader>Overview</DrawerHeader>
 
           <DrawerBody>
             <p>Drawer body content</p>

@@ -1,14 +1,14 @@
 import { AspectRatio, Image } from "@chakra-ui/react";
-import { AssetSelector } from "../../assets";
+import { SlidesSelector } from "../../assets";
 
-export default function ImageContainer() {
+export default function ImageContainer({
+  src,
+}: {
+  src: typeof SlidesSelector;
+}) {
   return (
     <AspectRatio maxW="400px" ratio={7 / 6}>
-      <Image
-        src={AssetSelector.systemModel}
-        alt="systemmodel"
-        objectFit="cover"
-      />
+      <Image src={src as unknown as string} />
     </AspectRatio>
   );
 }
