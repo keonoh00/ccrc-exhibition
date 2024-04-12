@@ -1,4 +1,4 @@
-import { Image } from "@chakra-ui/react";
+import { Image, Switch } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import Slider, { Settings as SlickSettings } from "react-slick";
 import { SlidesSelector } from "../../assets";
@@ -36,6 +36,7 @@ const IMAGEARRAY = [
 //////////////////////////////////////////////////
 
 export default function CCRCCarousel() {
+  const [isAutoPlay, setIsAutoPlay] = React.useState<boolean>(true);
   const slider = React.useRef<Slider>(null);
 
   useEffect(() => {
@@ -64,18 +65,22 @@ export default function CCRCCarousel() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    autoplay: true,
+    autoplay: isAutoPlay,
     autoplaySpeed: 2000,
   };
 
   return (
     <div>
-      <button onClick={() => slider?.current?.slickPrev()}>Prev</button>
-      <button onClick={() => slider?.current?.slickNext()}>Next</button>
+      <Switch
+        marginBottom={8}
+        isChecked={isAutoPlay}
+        onChange={(event) => {
+          setIsAutoPlay(event.target.checked);
+        }}
+      />
       <Slider ref={slider} {...settings}>
         {IMAGEARRAY.map((image, index) => (
           <div id={"slider" + index}>
-            {/* <Button position={"absolute"}>Click Me</Button> */}
             <Image src={image} />
           </div>
         ))}
