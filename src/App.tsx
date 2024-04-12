@@ -1,31 +1,24 @@
-import React from "react";
 import Header from "./components/Header/Header";
 import Home from "./screens/Home";
 import NotFound from "./screens/NotFound";
-import { VirtualRoute } from "./types/screens";
+
+import Demo from "./screens/Demo";
+import { VirtualPath } from "./types/screens";
+import { useAppSelector } from "./hooks/useAppDispatch";
 
 function App() {
-  const [virtualRoute, setVirtualRoute] = React.useState<VirtualRoute>(
-    VirtualRoute.HOME
-  );
-
-  const ScreenRouter = (route: VirtualRoute) => {
-    switch (route) {
-      case VirtualRoute.HOME:
-        return <Home onChangeRoute={onChangeRoute} />;
-      default:
-        return <NotFound onChangeRoute={onChangeRoute} />;
-    }
-  };
-
-  const onChangeRoute = (route: VirtualRoute) => {
-    setVirtualRoute(route);
-  };
+  const { path } = useAppSelector((state) => state.virtualRouter);
 
   return (
     <div className="App">
       <Header />
-      {ScreenRouter(virtualRoute)}
+      {path === VirtualPath.HOME ? (
+        <Home />
+      ) : path === VirtualPath.DEMO ? (
+        <Demo />
+      ) : (
+        <NotFound />
+      )}
     </div>
   );
 }

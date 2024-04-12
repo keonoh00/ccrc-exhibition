@@ -11,9 +11,17 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRef } from "react";
+import { VirtualPath } from "../../types/screens";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { routeTo } from "../../store/vitutalRouteStore";
 
 export default function CCRCDrawer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useAppDispatch();
+  const onChangeRoute = (path: VirtualPath) => {
+    dispatch(routeTo(path));
+    onClose();
+  };
   const btnRef = useRef();
 
   return (
@@ -31,7 +39,9 @@ export default function CCRCDrawer() {
           <DrawerHeader>Overview</DrawerHeader>
 
           <DrawerBody>
-            <p>Drawer body content</p>
+            <Button onClick={() => onChangeRoute(VirtualPath.DEMO)}>
+              demo
+            </Button>
           </DrawerBody>
 
           <DrawerFooter>

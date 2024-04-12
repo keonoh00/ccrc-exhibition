@@ -1,7 +1,4 @@
-export enum VirtualRoute {
+export enum VirtualPath {
   HOME = "/",
+  DEMO = "/demo",
 }
-
-export type ScreenBaseProps = {
-  onChangeRoute: (route: VirtualRoute) => void;
-};
