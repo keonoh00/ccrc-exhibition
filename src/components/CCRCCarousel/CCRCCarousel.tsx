@@ -24,13 +24,7 @@ const MAINSLIDE = [
   SlidesSelector.Slide6,
 
   SlidesSelector.Slide10,
-  SlidesSelector.Slide11,
-  SlidesSelector.Slide12,
-  SlidesSelector.Slide13,
-  SlidesSelector.Slide14,
-  SlidesSelector.Slide15,
-  SlidesSelector.Slide16,
-  SlidesSelector.Slide17,
+
   SlidesSelector.Slide18,
   SlidesSelector.Slide19,
   SlidesSelector.Slide20,
@@ -42,10 +36,9 @@ const MAINSLIDE = [
 // Hyperlink on Image
 //////////////////////////////////////////////////
 
-export default function CCRCCarousel() {
+const Slide6Component = ({ index }: { index: number }) => {
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
   const [modalContent, setModalContent] = React.useState<ReactElement>(<></>);
-  const slider = React.useRef<Slider>(null);
 
   const popUp = (index: number) => {
     if (index === 1) {
@@ -57,6 +50,197 @@ export default function CCRCCarousel() {
     }
     setIsModalOpen(true);
   };
+
+  return (
+    <div id={"slider" + index}>
+      <Box
+        backgroundColor={"black"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <Button
+          style={{
+            position: "absolute",
+            top: "68%",
+            marginLeft: "17vw",
+            width: "21vw",
+            backgroundColor: "transparent",
+          }}
+          onClick={() => popUp(1)}
+        />
+        <Button
+          style={{
+            position: "absolute",
+            top: "74%",
+            marginLeft: "17vw",
+            width: "28vw",
+            backgroundColor: "transparent",
+          }}
+          onClick={() => popUp(2)}
+        />
+        <Button
+          style={{
+            position: "absolute",
+            top: "80.8%",
+            marginLeft: "17vw",
+            width: "29vw",
+            backgroundColor: "transparent",
+          }}
+          onClick={() => popUp(3)}
+        />
+
+        <Image marginLeft={"12%"} width={"75%"} src={SlidesSelector.Slide6} />
+      </Box>
+      <Modal
+        isOpen={isModalOpen}
+        size={"7xl"}
+        isCentered={true}
+        onClose={() => setIsModalOpen((value) => !value)}
+      >
+        <ModalOverlay />
+
+        <ModalContent maxW="70vw">
+          <ModalHeader />
+          <ModalCloseButton />
+          <ModalBody alignItems={"center"} justifyContent={"center"}>
+            {modalContent}
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </div>
+  );
+};
+
+const Slide10Component = ({ index }: { index: number }) => {
+  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
+  const [modalContent, setModalContent] = React.useState<ReactElement>(<></>);
+
+  const popUp = (index: number) => {
+    if (index === 1) {
+      setModalContent(<Image src={SlidesSelector.Slide11} />);
+    } else if (index === 2) {
+      setModalContent(<Image src={SlidesSelector.Slide12} />);
+    } else if (index === 3) {
+      setModalContent(<Image src={SlidesSelector.Slide13} />);
+    } else if (index === 4) {
+      setModalContent(<Image src={SlidesSelector.Slide14} />);
+    } else if (index === 5) {
+      setModalContent(<Image src={SlidesSelector.Slide15} />);
+    } else if (index === 6) {
+      setModalContent(<Image src={SlidesSelector.Slide16} />);
+    } else {
+      setModalContent(<Image src={SlidesSelector.Slide17} />);
+    }
+    setIsModalOpen(true);
+  };
+
+  return (
+    <div id={"slider" + index}>
+      <Box
+        backgroundColor={"black"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        {/* DATASET */}
+
+        <Button
+          style={{
+            position: "absolute",
+            top: "26%",
+            marginLeft: "18vw",
+            width: "12vh",
+            backgroundColor: "transparent",
+          }}
+          onClick={() => popUp(1)}
+        />
+        <Button
+          style={{
+            position: "absolute",
+            top: "26%",
+            marginLeft: "25vw",
+            width: "25vh",
+            backgroundColor: "transparent",
+          }}
+          onClick={() => popUp(2)}
+        />
+        <Button
+          style={{
+            position: "absolute",
+            top: "26%",
+            marginLeft: "38vw",
+            width: "16vh",
+            backgroundColor: "transparent",
+          }}
+          onClick={() => popUp(3)}
+        />
+
+        {/* ATTACK */}
+
+        <Button
+          style={{
+            position: "absolute",
+            top: "65%",
+            marginLeft: "18vw",
+            width: "21vw",
+            backgroundColor: "transparent",
+          }}
+          onClick={() => popUp(4)}
+        />
+        <Button
+          style={{
+            position: "absolute",
+            top: "73%",
+            marginLeft: "18vw",
+            width: "28vw",
+            backgroundColor: "transparent",
+          }}
+          onClick={() => popUp(5)}
+        />
+        <Button
+          style={{
+            position: "absolute",
+            top: "81%",
+            marginLeft: "18vw",
+            width: "29vw",
+            backgroundColor: "transparent",
+          }}
+          onClick={() => popUp(6)}
+        />
+        <Button
+          style={{
+            position: "absolute",
+            top: "89%",
+            marginLeft: "18vw",
+            width: "29vw",
+            backgroundColor: "transparent",
+          }}
+          onClick={() => popUp(7)}
+        />
+
+        <Image marginLeft={"12%"} width={"75%"} src={SlidesSelector.Slide10} />
+      </Box>
+      <Modal
+        isOpen={isModalOpen}
+        size={"7xl"}
+        isCentered={true}
+        onClose={() => setIsModalOpen((value) => !value)}
+      >
+        <ModalOverlay />
+
+        <ModalContent maxW="70vw">
+          <ModalHeader />
+          <ModalCloseButton />
+          <ModalBody alignItems={"center"} justifyContent={"center"}>
+            {modalContent}
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </div>
+  );
+};
+
+export default function CCRCCarousel() {
+  const slider = React.useRef<Slider>(null);
 
   useEffect(() => {
     // Event listener for slide left and right
@@ -93,74 +277,19 @@ export default function CCRCCarousel() {
       <div>
         <Slider ref={slider} {...settings}>
           {MAINSLIDE.map((image, index) =>
-            index !== 5 ? (
-              <div id={"slider" + index}>
-                <Box
-                  flex={1}
-                  backgroundColor={"black"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                >
-                  <Image marginLeft={"12%"} width={"76%"} src={image} />
-                </Box>
-              </div>
+            index === 5 ? (
+              <Slide6Component index={index} />
+            ) : index === 6 ? (
+              <Slide10Component index={index} />
             ) : (
               <div id={"slider" + index}>
                 <Box
-                  flex={1}
                   backgroundColor={"black"}
                   justifyContent={"center"}
                   alignItems={"center"}
                 >
-                  <Button
-                    style={{
-                      position: "absolute",
-                      top: "68%",
-                      marginLeft: "17vw",
-                      width: "21vw",
-                      backgroundColor: "transparent",
-                    }}
-                    onClick={() => popUp(1)}
-                  />
-                  <Button
-                    style={{
-                      position: "absolute",
-                      top: "74%",
-                      marginLeft: "17vw",
-                      width: "28vw",
-                      backgroundColor: "transparent",
-                    }}
-                    onClick={() => popUp(2)}
-                  />
-                  <Button
-                    style={{
-                      position: "absolute",
-                      top: "80.8%",
-                      marginLeft: "17vw",
-                      width: "29vw",
-                      backgroundColor: "transparent",
-                    }}
-                    onClick={() => popUp(3)}
-                  />
-
-                  <Image marginLeft={"12%"} width={"76%"} src={image} />
+                  <Image marginLeft={"12%"} width={"75%"} src={image} />
                 </Box>
-                <Modal
-                  isOpen={isModalOpen}
-                  size={"7xl"}
-                  isCentered={true}
-                  onClose={() => setIsModalOpen((value) => !value)}
-                >
-                  <ModalOverlay />
-
-                  <ModalContent maxW="70vw">
-                    <ModalHeader />
-                    <ModalCloseButton />
-                    <ModalBody alignItems={"center"} justifyContent={"center"}>
-                      {modalContent}
-                    </ModalBody>
-                  </ModalContent>
-                </Modal>
               </div>
             )
           )}
