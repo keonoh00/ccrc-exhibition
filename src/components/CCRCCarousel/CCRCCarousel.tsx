@@ -278,11 +278,15 @@ export default function CCRCCarousel() {
         <Slider ref={slider} {...settings}>
           {MAINSLIDE.map((image, index) =>
             index === 5 ? (
-              <Slide6Component index={index} />
+              <React.Fragment key={index}>
+                <Slide6Component index={index} />
+              </React.Fragment>
             ) : index === 6 ? (
-              <Slide10Component index={index} />
+              <React.Fragment key={index}>
+                <Slide10Component index={index} />
+              </React.Fragment>
             ) : (
-              <div id={"slider" + index}>
+              <div key={"slider" + index}>
                 <Box
                   backgroundColor={"black"}
                   justifyContent={"center"}
