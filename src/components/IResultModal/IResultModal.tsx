@@ -47,8 +47,8 @@ const ResultTable = ({
   attackType: string;
 }) => {
   const fullData = getHardCodeData(attackType as AttackType);
-  const data =
-    fullData[LABELS[image as keyof typeof LABELS] as keyof typeof fullData];
+  const label = LABELS[image as keyof typeof LABELS];
+  const data = fullData[label as keyof typeof fullData];
 
   return (
     <TableContainer>

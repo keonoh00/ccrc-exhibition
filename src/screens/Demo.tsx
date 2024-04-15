@@ -172,7 +172,6 @@ const IMAGE_PERTURBED_MAP = {
 
 type ImageKeyType = keyof typeof ORIGINAL_IMAGES;
 type ImageNoiseMapKeyType = keyof typeof IMAGE_NOISE_MAP;
-type ImagePerturbedMapKeyType = keyof typeof IMAGE_PERTURBED_MAP;
 type ImageXMapInternalKeyType = keyof (typeof IMAGE_NOISE_MAP)["image0"];
 
 const ImageSelector: React.FC<ImageSelectorProps> = ({
@@ -352,6 +351,23 @@ const Demo: React.FC<DemoScreenProps> = () => {
     setNoiseImage(ORIGINAL_IMAGES[originalImage as ImageKeyType] || null);
   };
 
+  const handleOriginalImageReset = () => {
+    setOriginalImage(null);
+    setNoiseImage(null);
+    setAttackedImage(null);
+    setAttackType(null);
+  };
+
+  const handleNoiseImageReset = () => {
+    setNoiseImage(null);
+    setAttackedImage(null);
+    setAttackType(null);
+  };
+
+  const handleAttackedImageReset = () => {
+    setAttackedImage(null);
+  };
+
   return (
     <>
       <Flex
@@ -365,7 +381,7 @@ const Demo: React.FC<DemoScreenProps> = () => {
           type={ImageSelectorType.INPUT}
           image={ORIGINAL_IMAGES[originalImage as ImageKeyType] || null}
           onChangeImage={({ image }) => setOriginalImage(image)}
-          onReset={() => setOriginalImage(null)}
+          onReset={handleOriginalImageReset}
         />
 
         <ImageSelector
@@ -378,7 +394,7 @@ const Demo: React.FC<DemoScreenProps> = () => {
               : null
           }
           onChangeImage={({ image }) => setNoiseImage(image)}
-          onReset={() => setNoiseImage(null)}
+          onReset={handleNoiseImageReset}
         />
 
         <ImageSelector
@@ -393,7 +409,7 @@ const Demo: React.FC<DemoScreenProps> = () => {
               : null
           }
           onChangeImage={({ image }) => setAttackedImage(image)}
-          onReset={() => setAttackedImage(null)}
+          onReset={handleAttackedImageReset}
         />
       </Flex>
       <Flex direction={"column"} flex={1} alignItems={"center"}>
@@ -402,7 +418,7 @@ const Demo: React.FC<DemoScreenProps> = () => {
             value={attackType || ""}
             placeholder="Select an attack type"
             onChange={(e) => {
-              console.log("e.target.value", e.target.value);
+              handleNoiseImageReset();
               handleDropdownSelect(e.target.value);
             }}
           >
