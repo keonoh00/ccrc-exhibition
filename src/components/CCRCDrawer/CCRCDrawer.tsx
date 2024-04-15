@@ -11,22 +11,32 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRef } from "react";
+import { useAppSelector } from "../../hooks/useAppDispatch";
 import { VirtualPath } from "../../types/screens";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { routeTo } from "../../store/vitutalRouteStore";
+
+const HomeDrawerContent: React.FC = () => {
+  return <DrawerBody></DrawerBody>;
+};
+
+const DemoDrawerContent: React.FC = () => {
+  return <DrawerBody></DrawerBody>;
+};
 
 export default function CCRCDrawer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const dispatch = useAppDispatch();
-  const onChangeRoute = (path: VirtualPath) => {
-    dispatch(routeTo(path));
-    onClose();
-  };
+  const { path } = useAppSelector((state) => state.virtualRouter);
+
   const btnRef = useRef();
 
   return (
     <>
-      <HamburgerIcon w={10} h={10} ref={btnRef.current} onClick={onOpen} />
+      <HamburgerIcon
+        marginLeft={10}
+        w={10}
+        h={10}
+        ref={btnRef.current}
+        onClick={onOpen}
+      />
       <Drawer
         isOpen={isOpen}
         placement="right"
@@ -38,11 +48,11 @@ export default function CCRCDrawer() {
           <DrawerCloseButton />
           <DrawerHeader>Overview</DrawerHeader>
 
-          <DrawerBody>
-            <Button onClick={() => onChangeRoute(VirtualPath.DEMO)}>
-              demo
-            </Button>
-          </DrawerBody>
+          {path === VirtualPath.HOME ? (
+            <HomeDrawerContent />
+          ) : (
+            <DemoDrawerContent />
+          )}
 
           <DrawerFooter>
             <Button onClick={onClose} colorScheme="blue">

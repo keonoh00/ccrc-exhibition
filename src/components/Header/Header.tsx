@@ -1,15 +1,25 @@
-import { Flex, Image } from "@chakra-ui/react";
+import { Box, Button, chakra, Flex, Image } from "@chakra-ui/react";
 import CCRCDrawer from "../CCRCDrawer/CCRCDrawer";
 import { AssetSelector } from "../../assets";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { routeTo } from "../../store/vitutalRouteStore";
 import { VirtualPath } from "../../types/screens";
 
+const RouteButton = chakra(Button, {
+  baseStyle: {
+    color: "black",
+    marginRight: "5px",
+  },
+});
+
 export default function Header() {
   const dispatch = useAppDispatch();
 
-  const backToHome = () => {
+  const pushToHome = () => {
     dispatch(routeTo(VirtualPath.HOME));
+  };
+  const pushToDemo = () => {
+    dispatch(routeTo(VirtualPath.DEMO));
   };
   return (
     <Flex
@@ -24,9 +34,19 @@ export default function Header() {
         src={AssetSelector.logo}
         alt="logo"
         aspectRatio={6 / 1}
-        onClick={backToHome}
+        onClick={pushToHome}
       />
-      <CCRCDrawer />
+
+      <Box>
+        <RouteButton colorScheme={"whiteAlpaka"} onClick={pushToHome}>
+          Home
+        </RouteButton>
+        <RouteButton colorScheme={"whiteAlpaka"} onClick={pushToDemo}>
+          Demo
+        </RouteButton>
+
+        <CCRCDrawer />
+      </Box>
     </Flex>
   );
 }
