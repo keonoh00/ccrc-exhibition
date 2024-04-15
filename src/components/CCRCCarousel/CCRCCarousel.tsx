@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Flex,
   Image,
   Modal,
   ModalBody,
@@ -8,6 +9,8 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  Switch,
+  Text,
 } from "@chakra-ui/react";
 import React, { ReactElement, useEffect } from "react";
 import Slider, { Settings as SlickSettings } from "react-slick";
@@ -240,6 +243,7 @@ const Slide10Component = ({ index }: { index: number }) => {
 };
 
 export default function CCRCCarousel() {
+  const [isAutoPlay, setIsAutoPlay] = React.useState<boolean>(true);
   const slider = React.useRef<Slider>(null);
 
   useEffect(() => {
@@ -263,19 +267,18 @@ export default function CCRCCarousel() {
 
   const settings: SlickSettings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    autoplay: false,
     autoplaySpeed: 2000,
   };
 
   return (
     <>
       <div>
-        <Slider ref={slider} {...settings}>
+        <Slider ref={slider} autoplay={isAutoPlay} {...settings}>
           {MAINSLIDE.map((image, index) =>
             index === 5 ? (
               <React.Fragment key={index}>
@@ -298,6 +301,16 @@ export default function CCRCCarousel() {
             )
           )}
         </Slider>
+        <Flex position={"absolute"} right={15}>
+          <Text marginRight={15}>AutoPlay</Text>
+          <Switch
+            isChecked={isAutoPlay}
+            onChange={(event) => {
+              setIsAutoPlay(event.target.checked);
+              slider.current?.slickPlay();
+            }}
+          />
+        </Flex>
       </div>
     </>
   );
