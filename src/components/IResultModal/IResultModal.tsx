@@ -12,69 +12,86 @@ import {
   TableContainer,
   Tbody,
   Td,
-  Tfoot,
   Th,
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import { BIMRESULT, FSGMRESULT, LABELS, PGDRESULT } from "./constant";
+import { AttackType } from "../../screens/Demo";
 
 interface IResultModalProps {
   isOpen: boolean;
   onClose: () => void;
+  image: string;
+  attackType: string;
 }
 
-const ResultTable = () => {
+const getHardCodeData = (attackType: AttackType) => {
+  switch (attackType) {
+    case AttackType.FGSM:
+      return FSGMRESULT;
+    case AttackType.PGD:
+      return PGDRESULT;
+    case AttackType.BIM:
+      return BIMRESULT;
+    default:
+      return Array(8).fill("N/A");
+  }
+};
+
+const ResultTable = ({
+  image,
+  attackType,
+}: {
+  image: string;
+  attackType: string;
+}) => {
+  const fullData = getHardCodeData(attackType as AttackType);
+  const data =
+    fullData[LABELS[image as keyof typeof LABELS] as keyof typeof fullData];
+
   return (
     <TableContainer>
       <Table variant="simple">
-        <TableCaption>Imperial to metric conversion factors</TableCaption>
+        <TableCaption>This is a demo result for prediction</TableCaption>
         <Thead>
           <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
+            <Th>Attack</Th>
+            <Th></Th>
+            <Th>No Attack</Th>
+            <Th></Th>
+          </Tr>
+          <Tr>
+            <Th fontWeight={"300"}>Baseline</Th>
+            <Th>Ours</Th>
+            <Th fontWeight={"300"}>Baseline</Th>
+            <Th>Ours</Th>
           </Tr>
         </Thead>
         <Tbody>
           <Tr>
-            <Td>inches</Td>
-            <Td>millimetres (mm)</Td>
-            <Td isNumeric>25.4</Td>
-          </Tr>
-          <Tr>
-            <Td>feet</Td>
-            <Td>centimetres (cm)</Td>
-            <Td isNumeric>30.48</Td>
-          </Tr>
-          <Tr>
-            <Td>yards</Td>
-            <Td>metres (m)</Td>
-            <Td isNumeric>0.91444</Td>
+            <Td fontWeight={"300"}>{data[0]}</Td>
+            <Td>{data[1]}</Td>
+            <Td fontWeight={"300"}>{data[2]}</Td>
+            <Td>{data[3]}</Td>
           </Tr>
         </Tbody>
-        <Tfoot>
-          <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
-          </Tr>
-        </Tfoot>
       </Table>
     </TableContainer>
   );
 };
 
 const IResultModal = (props: IResultModalProps) => {
-  const { isOpen, onClose } = props;
+  const { isOpen, onClose, image, attackType } = props;
 
   return (
-    <Modal size={"5xl"} isOpen={isOpen} onClose={onClose}>
+    <Modal size={"7xl"} isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Modal Title</ModalHeader>
+      <ModalContent maxW="70vw">
+        <ModalHeader>Experiment Result</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <ResultTable />
+          <ResultTable image={image} attackType={attackType} />
         </ModalBody>
 
         <ModalFooter>
