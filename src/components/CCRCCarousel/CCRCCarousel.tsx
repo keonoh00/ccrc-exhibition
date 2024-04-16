@@ -249,6 +249,7 @@ export default function CCRCCarousel() {
   useEffect(() => {
     // Event listener for slide left and right
     const handleKeyDown = (e: KeyboardEvent) => {
+      setIsAutoPlay(false);
       if (e.key === "ArrowRight") {
         const currentSlider = slider.current;
         currentSlider?.slickNext();
