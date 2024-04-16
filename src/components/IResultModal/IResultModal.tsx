@@ -56,24 +56,28 @@ const ResultTable = ({
         <TableCaption>This is a demo result for prediction</TableCaption>
         <Thead>
           <Tr>
-            <Th>Attack</Th>
+            <Th>Original Image</Th>
             <Th></Th>
-            <Th>No Attack</Th>
+            <Th>Perturbed Image</Th>
             <Th></Th>
           </Tr>
           <Tr>
-            <Th fontWeight={"300"}>Baseline</Th>
-            <Th>Ours</Th>
-            <Th fontWeight={"300"}>Baseline</Th>
-            <Th>Ours</Th>
+            <Th fontWeight={"300"}>Baseline (Confidence Score)</Th>
+            <Th>Ours (Confidence Score)</Th>
+            <Th fontWeight={"300"}>Baseline (Confidence Score)</Th>
+            <Th>Ours (Confidence Score)</Th>
           </Tr>
         </Thead>
         <Tbody>
           <Tr>
-            <Td fontWeight={"300"}>{data[0]}</Td>
-            <Td>{data[1]}</Td>
+            {/*
+            Data column order is 
+            NoAttackBaseline, NoAttackOurs, AttackBaseline, AttackOurs
+             */}
             <Td fontWeight={"300"}>{data[2]}</Td>
             <Td>{data[3]}</Td>
+            <Td fontWeight={"300"}>{data[0]}</Td>
+            <Td>{data[1]}</Td>
           </Tr>
         </Tbody>
       </Table>

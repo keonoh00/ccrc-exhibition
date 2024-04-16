@@ -34,8 +34,8 @@ interface ImageSelectorProps {
 }
 
 enum ImageSelectorType {
-  INPUT = "Input",
-  NOISEDINPUT = "Input with Noise",
+  INPUT = "Original Input",
+  NOISEDINPUT = "Perturbed Input (Image + Noise)",
   NOISE = "Noise",
 }
 
@@ -190,18 +190,29 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
   return (
     <Container>
       <HeaderText>{type}</HeaderText>
-      <Flex flex={1} width={"100%"} alignItems={"center"}>
+      <Flex
+        flex={1}
+        width={"100%"}
+        height={"85%"}
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
         {image ? (
           <Flex flex={1} flexDirection={"column"}>
-            <CloseButton size={"lg"} alignSelf={"flex-end"} onClick={onReset} />
-            <Image alignSelf={"center"} width={"40%"} src={image} />
+            <CloseButton
+              size={"md"}
+              alignSelf={"flex-end"}
+              position={"absolute"}
+              onClick={onReset}
+            />
+            <Image alignSelf={"center"} width={"60%"} src={image} />
           </Flex>
         ) : (
-          <Text textAlign={"center"}>No Image Selected</Text>
+          <Text justifySelf={"center"}>No Image Selected</Text>
         )}
       </Flex>
 
-      <Flex minHeight={"100%"}>
+      <Box height={"15%"}>
         {type === ImageSelectorType.INPUT ? (
           <Popover isOpen={isOpen} onClose={onClose}>
             <PopoverTrigger>
@@ -218,26 +229,28 @@ const ImageSelector: React.FC<ImageSelectorProps> = ({
               <PopoverCloseButton />
               <PopoverHeader>Select an image</PopoverHeader>
               <PopoverBody>
-                {Object.keys(ORIGINAL_IMAGES).map((sampleImage, index) => (
-                  <Button
-                    key={index}
-                    onClick={() => handleImageChange({ image: sampleImage })}
-                    colorScheme={"whiteAlpaka"}
-                    margin={2}
-                    height={"fit-content"}
-                    maxWidth={"28%"}
-                  >
-                    <Image
-                      src={ORIGINAL_IMAGES[sampleImage as ImageKeyType]}
-                      width={"100%"}
-                    />
-                  </Button>
-                ))}
+                <Box>
+                  {Object.keys(ORIGINAL_IMAGES).map((sampleImage, index) => (
+                    <Button
+                      key={index}
+                      onClick={() => handleImageChange({ image: sampleImage })}
+                      colorScheme={"whiteAlpaka"}
+                      height={"fit-content"}
+                      maxWidth={"25%"}
+                      marginBottom={2}
+                    >
+                      <Image
+                        src={ORIGINAL_IMAGES[sampleImage as ImageKeyType]}
+                        width={"100%"}
+                      />
+                    </Button>
+                  ))}
+                </Box>
               </PopoverBody>
             </PopoverContent>
           </Popover>
         ) : null}
-      </Flex>
+      </Box>
     </Container>
   );
 };
